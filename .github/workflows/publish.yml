@@ -35,7 +35,7 @@ jobs:
             ls -R .
             exit 1
           fi
-          # Rinominandolo index.pdf, sarà visualizzabile direttamente nel browser
+          # Naming it index.pdf makes it appear as the 'home page'
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
