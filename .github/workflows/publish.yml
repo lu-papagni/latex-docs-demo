@@ -25,8 +25,16 @@ jobs:
 
       - name: Prepare artifact
         run: |
-          mkdir public
-          cp main.pdf public/index.pdf 
+          mkdir -p public
+          if [ -f docs/main.pdf ]; then
+            cp docs/main.pdf public/index.pdf
+          elif [ -f main.pdf ]; then
+            cp main.pdf public/index.pdf
+          else
+            echo "No PDF found. Listing repo files for debugging:"
+            ls -R .
+            exit 1
+          fi
           # Rinominandolo index.pdf, sarà visualizzabile direttamente nel browser
 
       - name: Setup Pages
