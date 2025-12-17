@@ -1,0 +1,147 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{cite}
+
+% Code highlighting
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green!60!black},
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    frame=single,
+    breaklines=true,
+    captionpos=b
+}
+
+\title{FizzBuzz Algorithm Documentation}
+\author{Luca}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\label{sec:intro}
+
+The FizzBuzz algorithm is a classic programming exercise used to test basic understanding of loops, conditionals, and modular arithmetic. This document provides a comprehensive implementation and explanation of the FizzBuzz algorithm in Python.
+
+The algorithm iterates through numbers from 1 to 100 and applies the following rules:
+\begin{itemize}
+    \item If the number is divisible by 3, output "Fizz"
+    \item If the number is divisible by 5, output "Buzz"
+    \item If the number is divisible by both 3 and 5, output "FizzBuzz"
+    \item Otherwise, output the number itself
+\end{itemize}
+
+\section{Algorithm Overview}
+\label{sec:overview}
+
+The core logic can be visualized in the flowchart shown in Figure~\ref{fig:flowchart}.
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}[node distance=2cm]
+    \node (start) [startstop] {Start};
+    \node (input) [io, below of=start] {Input number n};
+    \node (cond1) [decision, below of=input, yshift=-0.5cm] {n \% 3 == 0?};
+    \node (cond2) [decision, right of=cond1, xshift=2cm] {n \% 5 == 0?};
+    \node (fizzbuzz) [process, below of=cond2] {Output "FizzBuzz"};
+    \node (fizz) [process, left of=fizzbuzz, xshift=-2cm] {Output "Fizz"};
+    \node (buzz) [process, right of=fizzbuzz, xshift=2cm] {Output "Buzz"};
+    \node (number) [process, below of=cond1] {Output n};
+    \node (end) [startstop, below of=number] {End};
+
+    \draw [arrow] (start) -- (input);
+    \draw [arrow] (input) -- (cond1);
+    \draw [arrow] (cond1) -- node[anchor=east] {Yes} (cond2);
+    \draw [arrow] (cond2) -- node[anchor=south] {Yes} (fizzbuzz);
+    \draw [arrow] (cond2) -- node[anchor=north] {No} (fizz);
+    \draw [arrow] (cond1) -- node[anchor=east] {No} (number);
+    \draw [arrow] (fizzbuzz) -- (end);
+    \draw [arrow] (fizz) -- (end);
+    \draw [arrow] (buzz) -- (end);
+    \draw [arrow] (number) -- (end);
+\end{tikzpicture}
+\caption{FizzBuzz Algorithm Flowchart}
+\label{fig:flowchart}
+\end{figure}
+
+\section{Code Implementation}
+\label{sec:code}
+
+The implementation consists of two main functions: \texttt{fizzbuzz()} and \texttt{main()}.
+
+\subsection{The fizzbuzz Function}
+
+The \texttt{fizzbuzz} function takes an integer as input and returns the appropriate string based on the divisibility rules.
+
+\lstinputlisting[caption=FizzBuzz Function, firstline=13, lastline=30]{fizzbuzz.py}
+
+\subsection{The main Function}
+
+The \texttt{main} function iterates through numbers 1 to 100 and prints the result of calling \texttt{fizzbuzz} on each.
+
+\lstinputlisting[caption=Main Function, firstline=32, lastline=38]{fizzbuzz.py}
+
+\section{Sample Output}
+\label{sec:sample}
+
+Table~\ref{tab:sample} shows the output for the first 20 numbers.
+
+\begin{table}[h]
+\centering
+\caption{Sample FizzBuzz Output}
+\label{tab:sample}
+\begin{tabular}{|c|c|}
+\hline
+Number & Output \\
+\hline
+1 & 1 \\
+2 & 2 \\
+3 & Fizz \\
+4 & 4 \\
+5 & Buzz \\
+6 & Fizz \\
+7 & 7 \\
+8 & 8 \\
+9 & Fizz \\
+10 & Buzz \\
+11 & 11 \\
+12 & Fizz \\
+13 & 13 \\
+14 & 14 \\
+15 & FizzBuzz \\
+16 & 16 \\
+17 & 17 \\
+18 & Fizz \\
+19 & 19 \\
+20 & Buzz \\
+\hline
+\end{tabular}
+\end{table}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+This implementation demonstrates a clean, modular approach to the FizzBuzz problem. The code is well-documented and follows Python best practices.
+
+For more information on similar algorithms, see~\cite{knuth1997art}.
+
+\bibliography{references}
+\bibliographystyle{plain}
+
+\end{document}
